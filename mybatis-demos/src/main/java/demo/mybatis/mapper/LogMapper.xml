@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.mybatis.mapper.LogMapper">
+
+	<resultMap id="BaseResultMap" type="demo.mybatis.entity.Log">
+		<id column="id" property="id" jdbcType="NUMERIC" />
+		<result column="action" property="action" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<sql id="BaseColumnList">
+		id, action, user_id userId
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="BaseColumnList" />
+		from log
+		where id = #{id}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from log
+		where id = #{id}
+	</delete>
+
+	<insert id="insert" parameterType="demo.mybatis.entity.Log">
+		insert into log (id, action, user_id)
+		values (#{id}, #{action}, #{userId})
+	</insert>
+
+	<select id="getAll" resultMap="BaseResultMap">
+		select
+		<include refid="BaseColumnList" />
+		from log
+	</select>
+</mapper>
