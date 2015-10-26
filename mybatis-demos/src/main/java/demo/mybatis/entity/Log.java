@@ -23,4 +23,15 @@ public class Log {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		buf.append("User{")
+		.append("id").append(":").append(id).append(", ")
+		.append("action").append(":").append(action).append(", ")
+		.append("userId").append(":").append(userId)
+		.append("}");
+		return buf.toString();
+	}
 }

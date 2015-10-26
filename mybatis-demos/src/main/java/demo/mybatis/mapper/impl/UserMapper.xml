@@ -54,4 +54,12 @@
 		<include refid="BaseColumnList" />
 		from user
 	</select>
+	
+	<!-- 自定义 -->
+	<select id="getByName" resultMap="BaseResultMap">
+    	select
+		<include refid="BaseColumnList" />
+		from user
+		where name = #{name}
+  	</select>
 </mapper>

@@ -23,4 +23,15 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder buf = new StringBuilder();
+		buf.append("User{")
+		.append("id").append(":").append(id).append(", ")
+		.append("name").append(":").append(name).append(", ")
+		.append("age").append(":").append(age)
+		.append("}");
+		return buf.toString();
+	}
 }
