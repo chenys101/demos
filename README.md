@@ -1,5 +1,7 @@
-#Demos¼¯ºÏ
+#Demosé›†åˆ
 
 ##1.Mybatis-demos
 
-#####Î´Íê´ýÐø£¬½ö¹©²Î¿¼
+##2.Finagle-demos(RPCæ¡†æž¶demo)
+
+#####æœªå®Œå¾…ç»­ï¼Œä»…ä¾›å‚è€ƒ
