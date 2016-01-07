@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.edr</groupId>
+		<artifactId>finagle-demos</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>finagle-interface</artifactId>
+	<name>finagle-interface</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<finagle.version>6.31.0</finagle.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.twitter</groupId>
+			<artifactId>finagle-core_2.11</artifactId>
+			<version>${finagle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.twitter</groupId>
+			<artifactId>finagle-thrift_2.11</artifactId>
+			<version>${finagle.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.edr</groupId>
+			<artifactId>finagle-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+		        <exclusion>
+		            <groupId>*</groupId>
+		            <artifactId>*</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>  
+  			<resource>  
+    			<directory>src/main/thrift</directory>  
+  			</resource>  
+		</resources>
+	
+		<plugins>
+			<plugin>
+				<groupId>com.twitter</groupId>
+				<artifactId>scrooge-maven-plugin</artifactId>
+				<version>4.3.0</version>
+				<configuration>
+					<outputDirectory>src/main/thrift-gen</outputDirectory>
+					<language>java</language> <!-- default is scala -->
+					<thriftOpts>
+						<!-- add other Scrooge command line options using thriftOpts -->
+						<thriftOpt>--finagle</thriftOpt>
+					</thriftOpts>
+					<!-- tell scrooge to extract thrifts from these artifacts -->
+					<dependencyIncludes>
+						<include>event-logger-thrift</include>
+					</dependencyIncludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>thrift-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.twitter</groupId>
+										<artifactId>
+											scrooge-maven-plugin
+										</artifactId>
+										<versionRange>[3.3.2,)</versionRange>
+										<goals>
+											<goal>compile</goal>
+											<goal>testCompile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

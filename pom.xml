@@ -9,5 +9,6 @@
 
 	<modules>
 		<module>mybatis-demos</module>
+		<module>finagle-demos</module>
 	</modules>
 </project>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd       
+       " default-lazy-init="true">
+       
+    <context:property-placeholder  location="
+    classpath:/dev/rpc.properties" ignore-resource-not-found="true"/>
+    
+     <!-- 工作线程池 -->
+    <bean id="executorServiceFuturePool" class="io.edr.finagle.api.ExecutorServiceFuturePoolFactory">
+    	<property name="poolSize" value="12"/>
+    	<property name="maximumPoolSize" value="20"/>
+    	<property name="keepAliveTime" value="900"/><!-- 单位秒，默认15分钟 -->
+    	<property name="queueSize" value="100"/><!-- 队列默认100 -->
+    </bean>
+    
+	<!-- RPC server的实现类 -->	
+	<context:component-scan base-package="io.edr.service" />	
+	
+	<!-- server demo -->
+	<bean id="rpcServer" class="io.edr.finagle.api.FinagleServerRegister">
+		<property name="maxConcurrentRequests" value="200"/><!-- 每个服务接口，最大并发请求数 -->
+		<property name="hostConnectionMaxIdleTime" value="900000"/><!-- 默认15分钟 -->
+		<property name="readTimeout" value="10000"/><!-- Maximum time to wait for the first byte to be read -->
+		<property name="requestTimeout" value="10000"/><!-- 服务端响应的超时时间。默认10秒 -->		
+		<property name="startPort" value="${thrift.defaultPort}"/>
+		<property name="namespace" value="${zookeeper.namespace}"/>		
+		<property name="zookeeperAddress" value="${zookeeper.url}"/>
+	</bean>    
+</beans>
