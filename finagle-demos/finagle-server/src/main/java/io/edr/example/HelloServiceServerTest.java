@@ -29,7 +29,7 @@ public class HelloServiceServerTest implements io.edr.finagle.demo.service.Hello
 	private ExecutorServiceFuturePool futurePool = new ExecutorServiceFuturePool(Executors.newFixedThreadPool(1));
 	
 	@Override
-	public Future<HelloResponse> hello(HelloRequest req) {
+	public Future<HelloResponse> hello(final HelloRequest req) {
 		return futurePool.apply(new Function0<HelloResponse>() {
 			@Override
 			public HelloResponse apply() {

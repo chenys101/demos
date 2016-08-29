@@ -13,4 +13,7 @@
 ######3.相关资料
 ######https://groups.google.com/forum/#!forum/finaglers
 ######http://www.infoq.com/cn/news/2014/05/twitter-finagle-intro
+######4.Maven相关（Twitter部分包在mvnrepository中无法找到）
+######添加Twitter私库，url：http://maven.twttr.com
+######若出现HTTPS证书问题[Fix https repository blocking by PKIX path building failed]，需要将Twitter证书导入到JDK中，具体可以参考如下：http://blog.csdn.net/wangjunjun2008/article/details/37662851，http://stackoverflow.com/questions/11617210/how-to-properly-import-a-selfsigned-certificate-into-java-keystore-that-is-avail/11617655#11617655
 
