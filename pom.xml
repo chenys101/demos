@@ -10,5 +10,6 @@
 		<module>mybatis-demos</module>
 		<module>finagle-demos</module>
     	<module>dubbo-demos</module>
-  	</modules>
+    	<module>grpc-demos</module>
+	</modules>
 </project>
