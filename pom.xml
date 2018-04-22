@@ -11,5 +11,6 @@
 		<module>finagle-demos</module>
     	<module>dubbo-demos</module>
     	<module>grpc-demos</module>
-	</modules>
+        <module>es-demo</module>
+    </modules>
 </project>
